@@ -116,7 +116,7 @@ input[type="radio"] {
 }
 
 .success {
-    display: none;
+    display: flex;
     background-color: #4fc4cf;
     color: #181818;
     padding: 8px 10px;
