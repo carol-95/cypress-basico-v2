@@ -44,12 +44,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             cy.get('.error').should('not.be.visible')
     })
 
-        it('Campo telefone continua vazio quando preenchido com valor não numérico', function(){ //it.only testa somente esse
-            cy.get('#phone')
-            .type('abcdefghij')
-            .should('have.value', "")
-
-    })
+            Cypress._.times(3, function(){
+                it('Campo telefone continua vazio quando preenchido com valor não numérico', function(){ //it.only testa somente esse
+                    cy.get('#phone')
+                    .type('abcdefghij')
+                    .should('have.value', "")
+        
+                })
+            })
 
     it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function(){
         cy.clock()   //congela relógio navegador
@@ -94,7 +96,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('not.be.visible')
     })
 
-    it.only('envia o formuário com sucesso usando um comando customizado', function(){
+    it('envia o formuário com sucesso usando um comando customizado', function(){
         cy.clock()
         
         cy.fillMandatoryFieldsAndSubmit() //executa o comando da pasta (commands.js)
@@ -204,12 +206,33 @@ describe('Central de Atendimento ao Cliente TAT', function() {
 
     })
 
+    it.only('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+        
+        cy.get('.error')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+          .and('contain', 'Valide os campos obrigatórios!')
+          .invoke('hide')
+          .should('not.be.visible')
+            //cy.get('.success')
+            //.should('not.be.visible')
+            //.invoke('show')
+            //.should('be.visible')
+            //.and('contain', 'Mensagem enviada com sucesso.')
+            //.invoke('hide')
+            //.should('not.be.visible')
+          
+          
+      })
+
+
+
+
+
 
 
     
-
-    
-
 
 
 
